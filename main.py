@@ -32,7 +32,7 @@ def get_habr_text(scrapping_minutes, view_full_text=False):
 
         base_url ='https://habr.com'
         url_for_scrapping = 'https://habr.com/ru/all'
-        HUBS = ['Блог компании Сравни.ру']
+        HUBS = ['дизайн', 'фото', 'web', 'python']
 
         response = requests.get(url_for_scrapping, headers=headers)
         response.raise_for_status()
@@ -46,7 +46,7 @@ def get_habr_text(scrapping_minutes, view_full_text=False):
             hubs = [hub.text.strip() for hub in hubs]
 
             for hub in hubs:
-                if hub in HUBS:
+                if hub.lower() in HUBS:
                     href = article.find(class_="tm-article-snippet__title-link").attrs['href']
                     link = base_url + href
                     if link in new_paper:
